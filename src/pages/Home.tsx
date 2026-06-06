@@ -10,7 +10,7 @@ import ProjectCard from "../components/ProjectCard";
 import Reveal from "../components/Reveal";
 import SectionLabel from "../components/SectionLabel";
 import TypingReveal from "../components/TypingReveal";
-import { articles, heroImages, projects, services } from "../data/siteData";
+import { heroImages, projects, services } from "../data/siteData";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -103,17 +103,19 @@ export default function Home() {
               const Icon = service.icon;
               return (
                 <Reveal key={service.title} delay={index * 0.08}>
-                  <motion.article whileHover={{ y: -14, rotate: index === 1 ? 1.5 : -1.5 }} className="noise-card group relative min-h-[420px] overflow-hidden rounded-[2.5rem] p-7 text-bone shadow-soft">
-                    <img className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" src={service.image} alt="" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="relative z-10 flex h-full min-h-[360px] flex-col justify-between">
-                      <Icon className="text-lime" size={34} />
-                      <div>
-                        <h3 className="headline mb-4 text-5xl">{service.title}</h3>
-                        <p className="font-semibold leading-relaxed text-bone/80">{service.description}</p>
+                  <Link to="/services" className="block cursor-pointer">
+                    <motion.article whileHover={{ y: -14, rotate: index === 1 ? 1.5 : -1.5 }} className="noise-card group relative min-h-[420px] overflow-hidden rounded-[2.5rem] p-7 text-bone shadow-soft">
+                      <img className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" src={service.image} alt="" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="relative z-10 flex h-full min-h-[360px] flex-col justify-between">
+                        <Icon className="text-lime" size={34} />
+                        <div>
+                          <h3 className="headline mb-4 text-5xl">{service.title}</h3>
+                          <p className="font-semibold leading-relaxed text-bone/80">{service.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  </motion.article>
+                    </motion.article>
+                  </Link>
                 </Reveal>
               );
             })}
@@ -160,27 +162,45 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-24 border-t border-blue/10">
         <div className="container-soft">
-          <Reveal className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <Reveal className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <SectionLabel>Journal</SectionLabel>
-              <h2 className="headline text-6xl text-blue md:text-8xl">Inside the Journal</h2>
+              <SectionLabel>Capabilities</SectionLabel>
+              <h2 className="headline text-6xl text-blue md:text-8xl">Tailored to Lead</h2>
             </div>
-            <MagneticButton href="/blog" label="Read More" variant="ghost" />
+            <MagneticButton href="/services" label="View All Services" variant="ghost" />
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-3">
-            {articles.slice(0, 3).map((article, index) => (
-              <Reveal key={article.title} delay={index * 0.08}>
-                <Link to="/blog" className="group block">
-                  <div className="noise-card mb-5 h-72 overflow-hidden organic-clip shadow-soft">
-                    <img className="h-full w-full object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.08]" src={article.image} alt={article.title} />
-                  </div>
-                  <p className="mb-2 text-sm font-black uppercase tracking-[0.18em] text-blue/60">{article.category} / {article.readTime}</p>
-                  <h3 className="headline text-4xl text-blue">{article.title}</h3>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="divide-y divide-blue/15">
+            {services.map((service, index) => {
+              return (
+                <Reveal key={service.title} delay={index * 0.08}>
+                  <Link
+                    to="/services"
+                    className="group flex flex-col justify-between py-8 md:flex-row md:items-center transition-all duration-500 hover:pl-4 hover:pr-4 rounded-[1.5rem] hover:bg-blue/5"
+                  >
+                    <div className="flex items-center gap-6">
+                      <span className="headline text-4xl text-blue/30 group-hover:text-blue transition-colors">
+                        0{index + 1}
+                      </span>
+                      <h3 className="headline text-3xl md:text-5xl text-blue transition-colors group-hover:translate-x-2 duration-300">
+                        {service.title}
+                      </h3>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2 md:mt-0">
+                      {service.deliverables.slice(0, 3).map((del) => (
+                        <span
+                          key={del}
+                          className="rounded-full border border-blue/10 bg-paper/60 px-4 py-1.5 text-xs font-bold text-moss/80 transition-colors group-hover:border-lime/40 group-hover:bg-lime/10"
+                        >
+                          {del}
+                        </span>
+                      ))}
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
