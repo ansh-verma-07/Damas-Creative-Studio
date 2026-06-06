@@ -6,6 +6,7 @@ export type Service = {
   title: string;
   description: string;
   image: string;
+  deliverables: string[];
 };
 
 export type Project = {
@@ -30,7 +31,7 @@ export const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Works", href: "/works" },
-  { label: "Blog", href: "/blog" },
+  { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" }
 ];
 
@@ -45,19 +46,22 @@ export const services: Service[] = [
     icon: Brush,
     title: "Brand Identity",
     description: "Visual systems with expressive marks, type, color, and campaign-ready guidelines.",
-    image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=900&q=90"
+    image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=900&q=90",
+    deliverables: ["Logo & Mark Systems", "Color & Typography Rules", "Brand Guidelines", "Stationery & Collateral", "Packaging Systems"]
   },
   {
     icon: Compass,
     title: "Brand Strategy",
     description: "Positioning, narrative, and launch direction for companies moving into their next chapter.",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=90"
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=90",
+    deliverables: ["Market Research", "Competitive Analysis", "Brand Architecture", "Positioning & Narrative", "Naming & Nomenclature"]
   },
   {
     icon: Layers3,
     title: "Creative Direction",
     description: "Cohesive art direction across websites, campaigns, product launches, and content systems.",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=90"
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=90",
+    deliverables: ["Website & App Art Direction", "Campaign & Photoshoots", "Content Strategy", "Motion Guidelines", "Interactive Prototypes"]
   }
 ];
 
