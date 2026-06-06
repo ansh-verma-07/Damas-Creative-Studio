@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import KineticHeadline from "../components/KineticHeadline";
 import MagneticButton from "../components/MagneticButton";
 import PageTransition from "../components/PageTransition";
@@ -8,13 +9,20 @@ import Reveal from "../components/Reveal";
 const budgets = ["<$5,000", "<$10,000", ">$10,000"];
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const selectedServices = searchParams.get("services");
+  const initialMessage = selectedServices
+    ? `Hello! I would like to request a timeline proposal for: ${selectedServices.split(",").join(", ")}.`
+    : "";
+
   const [budget, setBudget] = useState(budgets[1]);
+  const [message, setMessage] = useState(initialMessage);
   const [sent, setSent] = useState(false);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSent(true);
-    event.currentTarget.reset();
+    setMessage("");
     setTimeout(() => setSent(false), 2200);
   };
 
@@ -63,7 +71,13 @@ export default function Contact() {
               </div>
               <label className="grid gap-2 font-black">
                 Your Project
-                <textarea required rows={6} className="resize-none rounded-[1.4rem] border border-white/10 bg-white/[0.07] px-5 py-4 font-semibold outline-none transition focus:border-lime" />
+                <textarea
+                  value={message}
+                  onChange={(event: { target: { value: string } }) => setMessage(event.target.value)}
+                  required
+                  rows={6}
+                  className="resize-none rounded-[1.4rem] border border-white/10 bg-white/[0.07] px-5 py-4 font-semibold outline-none transition focus:border-lime"
+                />
               </label>
               <MagneticButton as="button" type="submit" label={sent ? "Message Sent" : "Submit"} className="w-full" />
             </div>
