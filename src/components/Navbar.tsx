@@ -25,7 +25,7 @@ export default function Navbar() {
           <Sparkles size={18} strokeWidth={2.7} />
         </Link>
         <div className="hidden items-center gap-1 md:flex">
-          {navItems.slice(1).map((item) => (
+          {navItems.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
